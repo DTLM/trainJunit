@@ -6,7 +6,11 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.condition.EnabledIf;
 import org.junit.jupiter.api.condition.EnabledOnOs;
 import org.junit.jupiter.api.condition.OS;
@@ -16,7 +20,15 @@ import treinoJunit.main.modal.Cliente;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assumptions.*;
 
+/**
+ * classe com exemplos de testes e como usar
+ * @author Thiago Leal Martins
+ *
+ */
 
+// anotação para ordernar a execução dos testes
+// outro metodo de ordenação OrderAnnotation.class
+@TestMethodOrder(MethodOrderer.DisplayName.class)
 public class TesteCliente {
 
 	public final Cliente CLIENTE = new Cliente("Thiago", 2000.0 , LocalDate.of(1999, 4, 22), "126.275.174-81");
@@ -24,6 +36,8 @@ public class TesteCliente {
 	/**
 	 * Teste de valores nulos e não nulos
 	 */
+	@DisplayName("A")
+	@Order(value = 1)
 	@Test
 	void testarObjetoCliente() {
 		Cliente cliente = null;
@@ -37,6 +51,8 @@ public class TesteCliente {
 	 * O primeiro teste da errado de proposito para mostrar a situação de erro
 	 * e o segundo é a forma esperada.
 	 */
+	@DisplayName("B")
+	@Order(2)
 	@Test
 	void validarVetores() {
 		int [] a = {0,1,2};
@@ -50,6 +66,7 @@ public class TesteCliente {
 	/**
 	 * teste de comparação entre dois numeros
 	 */
+	@Order(3)
 	@Test
 	void testeBasico() {
 		double valor1 = 5.0;
@@ -92,11 +109,14 @@ public class TesteCliente {
 	 * Existem outros testes como para rodar só se o sistema operacional for um determinado ou não for o selecionado (para melhor entendimento olhe
 	 * o codigo).
 	 */
+	@Order(4)
 	@Test
 	void testeComCondicionais() {
 		assumeTrue(5+5 == 10);
+		System.out.println("verdadeiro");
 	}
 	
+	@Order(5)
 	@Test
 	@EnabledOnOs(OS.WINDOWS)
 	void testeComOs() {
@@ -107,9 +127,25 @@ public class TesteCliente {
 	 * teste de condição, sempre em string
 	 */
 	private final String teste = "true";
+	@Order(6)
 	@Test
 	@EnabledIf(value = teste)
 	void testesComIfAnotacao() {
-		
+		System.out.println(teste);
+	}
+	
+	/**
+	 * teste de exceções, melhor forma utilizando lambda
+	 */
+	@Order(7)
+	@Test
+	void testeDeExcecao() {
+		assertThrows(Exception.class, () -> 
+		testeParaExcecao());
+	}
+	
+	boolean testeParaExcecao() throws Exception {
+		assumeTrue(System.getenv("USER") != null);
+		throw new Exception();
 	}
 }
