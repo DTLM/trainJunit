@@ -5,4 +5,4 @@
 <br>
 <p>Não serão criados nenhum teste problematico, mas simples para entender as anotações e testes da biblioteca do JUNIT.</p>
 
-<p>Testes aprendidos individualmente e nos bootcamp da DIO</p>
+<p>Testes aprendidos individualmente e nos bootcamps da DIO</p>
