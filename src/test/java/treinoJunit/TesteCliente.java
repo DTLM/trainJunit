@@ -7,10 +7,14 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.EnabledIf;
+import org.junit.jupiter.api.condition.EnabledOnOs;
+import org.junit.jupiter.api.condition.OS;
 
 import treinoJunit.main.modal.Cliente;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assumptions.*;
 
 
 public class TesteCliente {
@@ -78,5 +82,34 @@ public class TesteCliente {
 	@AfterEach
 	void depoisDeCada() {
 		System.out.println("finalizando antes de cada");
+	}
+	
+	
+	/**
+	 * Testes com condicionais são necessarios utilizar a classe Assumptions
+	 * que é o ato de assumir que algo está certo ou errado, como um if.
+	 * Se a assunção estiver correta, continua senão da um erro.
+	 * Existem outros testes como para rodar só se o sistema operacional for um determinado ou não for o selecionado (para melhor entendimento olhe
+	 * o codigo).
+	 */
+	@Test
+	void testeComCondicionais() {
+		assumeTrue(5+5 == 10);
+	}
+	
+	@Test
+	@EnabledOnOs(OS.WINDOWS)
+	void testeComOs() {
+		System.out.println("esse teste só é executado no windows");
+	}
+	
+	/**
+	 * teste de condição, sempre em string
+	 */
+	private final String teste = "true";
+	@Test
+	@EnabledIf(value = teste)
+	void testesComIfAnotacao() {
+		
 	}
 }
