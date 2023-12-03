@@ -48,7 +48,7 @@ public class TesteCliente {
 	/*
 	 * Teste para validar vetores
 	 * 
-	 * O primeiro teste da errado de proposito para mostrar a situação de erro
+	 * O primeiro teste está dando certo porque o endereço das variaveis são diferentes
 	 * e o segundo é a forma esperada.
 	 */
 	@DisplayName("B")
@@ -59,7 +59,7 @@ public class TesteCliente {
 		int [] b = {3};
 		int [] ab = {0,1,2};
 		
-		assertNotEquals(a, b);
+		assertNotEquals(a, ab);
 		assertArrayEquals(a, ab);
 	}
 	
@@ -126,12 +126,14 @@ public class TesteCliente {
 	/**
 	 * teste de condição, sempre em string
 	 */
-	private final String teste = "true";
+	public boolean teste() {
+		return true;
+	}
 	@Order(6)
 	@Test
-	@EnabledIf(value = teste)
+	@EnabledIf(value = "teste")
 	void testesComIfAnotacao() {
-		System.out.println(teste);
+		System.out.println("entrei if");
 	}
 	
 	/**
