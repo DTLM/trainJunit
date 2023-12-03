@@ -127,6 +127,7 @@ public class TesteCliente {
 	 * teste de condição, sempre em string
 	 */
 	public boolean teste() {
+		System.out.println("entrei teste para enable if");
 		return true;
 	}
 	@Order(6)
